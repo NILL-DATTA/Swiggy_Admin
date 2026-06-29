@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-charcoal: #1f1b16;
+  --color-charcoal-soft: #2a241d;
+  --color-orange: #fc8019;
+  --color-orange-deep: #e2231a;
+  --color-mint: #60b246;
+  --color-cream: #fff8f0;
+  --color-ink: #282c3f;
+  --color-muted: #686b78;
+  --color-line: #ece5da;
+  --font-display: "Segoe UI Semibold", "Avenir Next", ui-sans-serif, system-ui, sans-serif;
+  --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+}
+
+:root {
+  --background: #fff8f0;
+  --foreground: #282c3f;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+}
+
+@keyframes dash-travel {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pin-travel {
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.route-path {
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: dash-travel 2.6s 0.2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+.route-pin {
+  offset-path: path("M 40 320 C 120 80, 260 360, 340 120 S 520 40, 560 220");
+  animation: pin-travel 2.6s 0.2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+.fade-up {
+  animation: fade-up 0.6s ease forwards;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-path,
+  .route-pin,
+  .fade-up {
+    animation: none !important;
+    opacity: 1 !important;
+    stroke-dashoffset: 0 !important;
+  }
+}
